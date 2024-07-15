@@ -10,7 +10,7 @@ export default function PaginationControls({
   page,
   totalPages,
   onChange,
-}: IProps) {
+}: IProps): JSX.Element {
   return (
     <Pagination
       showControls
@@ -20,7 +20,7 @@ export default function PaginationControls({
       initialPage={1}
       total={totalPages}
       onChange={(value) => onChange({ value })}
-      className='flex justify-center'
+      className="flex justify-center"
     />
   );
 }

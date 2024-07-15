@@ -34,7 +34,7 @@ export default function TableView({
   page,
   totalPages,
   onChangePage,
-}: IProps) {
+}: IProps): JSX.Element {
   return (
     <Table
       aria-label="Example static collection table"

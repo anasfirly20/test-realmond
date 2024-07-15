@@ -15,7 +15,7 @@ export default function CardView({
   page,
   totalPages,
   onChangePage,
-}: IProps) {
+}: IProps): JSX.Element {
   return (
     <>
       <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">

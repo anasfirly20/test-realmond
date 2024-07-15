@@ -2,6 +2,17 @@ import UsersApi from '@/services/users/users';
 import { useQuery } from '@tanstack/react-query';
 import { useState, useMemo } from 'react';
 
+const viewOptions = [
+  {
+    id: 1,
+    label: 'Card',
+  },
+  {
+    id: 2,
+    label: 'Table',
+  },
+] as const;
+
 export const useHomePage = () => {
   const query = useQuery({
     queryKey: ['users'],
@@ -10,8 +21,8 @@ export const useHomePage = () => {
   });
 
   const rowsPerPage = 5;
-  const [page, setPage] = useState(1);
-  const [searchString, setSearchString] = useState('');
+  const [page, setPage] = useState<number>(1);
+  const [searchString, setSearchString] = useState<string>('');
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchString(e.target.value);
@@ -46,17 +57,6 @@ export const useHomePage = () => {
     return filteredUsers?.slice(start, end);
   }, [page, filteredUsers]);
 
-  const viewOptions = [
-    {
-      id: 1,
-      label: 'Card',
-    },
-    {
-      id: 2,
-      label: 'Table',
-    },
-  ] as const;
-
   type TViewOptions = (typeof viewOptions)[number]['id'];
 
   const [view, setView] = useState<TViewOptions>(1);
@@ -74,6 +74,6 @@ export const useHomePage = () => {
     view,
     handleChangeView,
     handleSearch,
-    viewOptions
+    viewOptions,
   };
 };

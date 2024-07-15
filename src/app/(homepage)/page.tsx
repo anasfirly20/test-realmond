@@ -5,8 +5,10 @@ import { Select, SelectItem } from '@nextui-org/react';
 import { useHomePage } from './functions';
 import TableView from './components/table-view';
 import CardView from './components/card-view';
+import ErrorComponent from '@/components/error-component';
+import LoadingComponent from '@/components/loading-component';
 
-export default function Home() {
+export default function HomePage(): JSX.Element {
   const {
     query,
     page,
@@ -16,9 +18,10 @@ export default function Home() {
     handleSearch,
     view,
     handleChangeView,
-    viewOptions
+    viewOptions,
   } = useHomePage();
-  const { isLoading } = query;
+  
+  const { isLoading, isError } = query;
 
   type TViewOptions = (typeof viewOptions)[number]['id'];
 
@@ -55,7 +58,9 @@ export default function Home() {
       >
         {(option) => <SelectItem key={option.id}>{option.label}</SelectItem>}
       </Select>
-      {viewMode[view]}
+      {isLoading && <LoadingComponent />}
+      {isError && <ErrorComponent retry={true} />}
+      {!isLoading && !isError && viewMode[view]}
     </section>
   );
 }
