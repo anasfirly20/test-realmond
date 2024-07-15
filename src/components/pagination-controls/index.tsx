@@ -17,6 +17,7 @@ export default function PaginationControls({
       showShadow
       loop
       page={page}
+      initialPage={1}
       total={totalPages}
       onChange={(value) => onChange({ value })}
       className='flex justify-center mt-5'

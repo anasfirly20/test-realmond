@@ -18,7 +18,7 @@ const viewOptions = [
 ];
 
 export default function Home() {
-  const { page, totalPages, handleChangePage, usersData } =
+  const { page, totalPages, handleChangePage, usersData, setSearchString } =
     useHomePage();
 
   return (
@@ -26,12 +26,7 @@ export default function Home() {
       <Input
         placeholder="Search User..."
         isClearable
-        // onChange={(e) => setSearchString(e.target.value)}
-        // onKeyDown={(e) => {
-        //   if (e.key === "Enter") {
-        //     handleSearch();
-        //   }
-        // }}
+        onChange={(e) => setSearchString(e.target.value)}
       />
       <Select
         items={viewOptions}
@@ -43,16 +38,20 @@ export default function Home() {
         {(option) => <SelectItem key={option.id}>{option.label}</SelectItem>}
       </Select>
       <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-        {usersData?.map((person) => {
-          return (
-            <CardProfile
-              key={person.id}
-              name={`${person.name.firstname} ${person.name.lastname}`}
-              email={person.email}
-              phone={person.phone}
-            />
-          );
-        })}
+        {usersData.length ? (
+          usersData?.map((person) => {
+            return (
+              <CardProfile
+                key={person.id}
+                name={`${person.name.firstname} ${person.name.lastname}`}
+                email={person.email}
+                phone={person.phone}
+              />
+            );
+          })
+        ) : (
+          <h1>NO DATA</h1>
+        )}
       </section>
       <PaginationControls
         page={page}

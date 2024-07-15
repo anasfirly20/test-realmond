@@ -19,14 +19,12 @@ export default function CardProfile({ name, email, phone }: IProps) {
             alt="empty profile picture"
             src={emptyProfilePic}
             layout="fill"
-            objectFit="cover"
-            className="size-full"
           />
         </div>
         <h1>{name}</h1>
         <p>{email}</p>
         <div className="px-6 py-2 border border-blue-300 rounded-md">
-          <p className="border-blue-300">{phone}</p>
+          <p className="border-blue-300">+ {phone}</p>
         </div>
       </div>
     </div>
