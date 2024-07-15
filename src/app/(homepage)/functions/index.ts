@@ -1,6 +1,6 @@
 import UsersApi from '@/services/users/users';
 import { useQuery } from '@tanstack/react-query';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 
 export const useHomePage = () => {
   const query = useQuery({
@@ -12,6 +12,9 @@ export const useHomePage = () => {
   const rowsPerPage = 5;
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState('');
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSearchString(e.target.value);
 
   const handleChangePage = ({ value }: { value: number }) => setPage(value);
 
@@ -36,10 +39,6 @@ export const useHomePage = () => {
     return filteredUsers && Math?.ceil(filteredUsers?.length / rowsPerPage);
   }, [filteredUsers]);
 
-  useEffect(() => {
-    if (totalPages === 1) setPage(1);
-  }, [totalPages]);
-
   const usersData = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
@@ -47,12 +46,34 @@ export const useHomePage = () => {
     return filteredUsers?.slice(start, end);
   }, [page, filteredUsers]);
 
+  const viewOptions = [
+    {
+      id: 1,
+      label: 'Card',
+    },
+    {
+      id: 2,
+      label: 'Table',
+    },
+  ] as const;
+
+  type TViewOptions = (typeof viewOptions)[number]['id'];
+
+  const [view, setView] = useState<TViewOptions>(1);
+  const handleChangeView = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setView(Number(e.target.value) as TViewOptions);
+    setPage(1);
+  };
+
   return {
     query,
     page,
     totalPages,
     handleChangePage,
     usersData,
-    setSearchString,
+    view,
+    handleChangeView,
+    handleSearch,
+    viewOptions
   };
 };
