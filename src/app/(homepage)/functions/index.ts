@@ -15,20 +15,15 @@ export const useHomePage = () => {
 
   const handleChangePage = ({ value }: { value: number }) => setPage(value);
 
-  const normalizePhoneNumber = ({ value }: { value: string }) => {
-    return value?.replace(/[\+\-\s]/g, '').toLowerCase();
-  };
-
   const filteredUsers = useMemo(() => {
     if (!query?.data?.data?.length) return [];
-
-    const searchLower = normalizePhoneNumber({ value: searchString });
 
     return query?.data?.data?.filter((user) => {
       const fullName =
         `${user?.name.firstname} ${user?.name?.lastname}`.toLowerCase();
       const email = user?.email?.toLowerCase();
-      const phone = normalizePhoneNumber({ value: user?.phone });
+      const phone = user?.phone?.toLowerCase();
+      const searchLower = searchString?.toLowerCase();
       return (
         fullName.includes(searchLower) ||
         email.includes(searchLower) ||

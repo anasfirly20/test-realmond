@@ -20,7 +20,7 @@ export default function PaginationControls({
       initialPage={1}
       total={totalPages}
       onChange={(value) => onChange({ value })}
-      className='flex justify-center mt-5'
+      className='flex justify-center'
     />
   );
 }
