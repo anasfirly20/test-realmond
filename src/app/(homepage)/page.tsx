@@ -29,7 +29,7 @@ export default function HomePage(): JSX.Element {
 
   const viewMode: Record<TViewOptions, React.ReactNode> = {
     '1': <CardView usersData={usersData} />,
-    '2': <TableView usersData={usersData} isLoading={isLoading} page={page} />,
+    '2': <TableView usersData={usersData} isLoading={isLoading} page={+page} />,
   };
 
   return (
@@ -56,7 +56,7 @@ export default function HomePage(): JSX.Element {
       {!isLoading && !isError && viewMode[view]}
       {usersData.length ? (
         <PaginationControls
-          page={page}
+          page={+page}
           totalPages={totalPages as number}
           onChange={handleChangePage}
         />

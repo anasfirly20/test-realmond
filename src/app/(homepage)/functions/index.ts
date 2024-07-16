@@ -1,5 +1,6 @@
 import UsersApi from '@/services/users/users';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useMemo } from 'react';
 
 const viewOptions = [
@@ -19,9 +20,13 @@ export const useHomePage = () => {
     queryFn: UsersApi.getUsers,
     retry: 3,
   });
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const page = searchParams.get('page') ?? '1';
+  const per_page = searchParams.get('per_page') ?? '3';
 
   const rowsPerPage = 3;
-  const [page, setPage] = useState<number>(1);
   const [searchString, setSearchString] = useState<string>('');
 
   const handleClearSearch = () => setSearchString('');
@@ -29,7 +34,9 @@ export const useHomePage = () => {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchString(e.target.value);
 
-  const handleChangePage = ({ value }: { value: number }) => setPage(value);
+  const handleChangePage = ({ value }: { value: number }) => {
+    router.push(`/?page=${value ?? 1}&per_page=${per_page}`);
+  };
 
   const filteredUsers = useMemo(() => {
     if (!query?.data?.data?.length) return [];
@@ -53,7 +60,7 @@ export const useHomePage = () => {
   }, [filteredUsers]);
 
   const usersData = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
+    const start = (+page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
     return filteredUsers?.slice(start, end);
@@ -64,7 +71,6 @@ export const useHomePage = () => {
   const [view, setView] = useState<TViewOptions>(1);
   const handleChangeView = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setView(Number(e.target.value) as TViewOptions);
-    setPage(1);
   };
 
   return {
