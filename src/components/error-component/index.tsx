@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import errorImage from '../../../public/error.svg';
 import { Button } from '@nextui-org/react';
 
 interface IProps {
@@ -10,7 +9,7 @@ export default function ErrorComponent({ retry }: IProps): JSX.Element {
   return (
     <section className="flex flex-col justify-center items-center gap-10 h-[70vh]">
       <Image
-        src={errorImage}
+        src="/error.svg"
         priority={true}
         width={300}
         height={300}

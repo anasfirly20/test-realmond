@@ -1,6 +1,4 @@
 import type { Config } from "tailwindcss";
-
-// Next ui
 import { nextui } from "@nextui-org/react";
 
 const config: Config = {
@@ -12,9 +10,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        "custom-green": "#006400",
-      },
       padding: {
         shorter4: "1vw",
         shorter3: "2vw",

@@ -50,7 +50,6 @@ export default function HomePage(): JSX.Element {
       <Input placeholder="Search User..." isClearable onChange={handleSearch} />
       <Select
         items={viewOptions}
-        aria-label="View mode"
         placeholder="Select view"
         defaultSelectedKeys={'1'}
         className="self-end w-[40%] md:w-[25%] lg:w-[15%]"

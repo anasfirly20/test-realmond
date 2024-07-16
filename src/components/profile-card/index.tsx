@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import emptyProfilePic from '../../../public/image/profile_pic.webp';
 import Link from 'next/link';
 import { capitalizeName } from '@/utils';
 import { IGetUsersResponse } from '@/services/users/types';
@@ -15,8 +14,9 @@ export default function CardProfile({ data }: IProps): JSX.Element {
         <div className="flex justify-center items-center rounded-full size-28 bg-blue-300 z-10 p-5 relative overflow-hidden">
           <Image
             alt="empty profile picture"
-            src={emptyProfilePic}
+            src="/image/profile_pic.webp"
             layout="fill"
+            priority
           />
         </div>
         <div className="flex flex-col items-center py-3 gap-2">

@@ -1,7 +1,6 @@
 import PaginationControls from '@/components/pagination-controls';
 import CardProfile from '@/components/profile-card';
 import { IGetUsersResponse } from '@/services/users/types';
-import React from 'react';
 
 interface IProps {
   usersData: IGetUsersResponse[];

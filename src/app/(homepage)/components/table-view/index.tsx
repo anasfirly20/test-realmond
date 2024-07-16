@@ -40,7 +40,6 @@ export default function TableView({
   return (
     <Table
       className="border rounded-md border-[#272729]"
-      aria-label="Example static collection table"
       bottomContent={
         <PaginationControls
           page={page}

@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import emptyProfilePic from '../../../../public/image/profile_pic.webp';
 import { capitalizeName } from '@/utils';
 import { Icon } from '@iconify/react';
 import ErrorComponent from '@/components/error-component';
@@ -22,7 +21,7 @@ export default function UserDetailPage({
   if (isError) return <ErrorComponent retry />;
 
   return (
-    <section className='w-full lg:w-[50%]'>
+    <section className="w-full lg:w-[50%]">
       <div className="border border-[#272729] rounded-md p-5 space-y-5">
         <div className="flex items-center gap-5">
           {isLoading ? (
@@ -31,17 +30,17 @@ export default function UserDetailPage({
             <div className="flex justify-center items-center rounded-full size-20 bg-blue-300 z-10 p-5 relative overflow-hidden">
               <Image
                 alt="empty profile picture"
-                src={emptyProfilePic}
+                src="/image/profile_pic.webp"
                 layout="fill"
               />
             </div>
           )}
           <Skeleton className="rounded-lg" isLoaded={!isLoading}>
-            <p>
+            <h1 className="text-xl">
               {capitalizeName(
                 `${userData?.data?.name?.firstname} ${userData?.data?.name?.lastname}`
               )}
-            </p>
+            </h1>
           </Skeleton>
         </div>
         <div className="space-y-3">
