@@ -18,20 +18,13 @@ export default function CardView({
 }: IProps): JSX.Element {
   return (
     <>
-      <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      <section className="w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
         {usersData.length ? (
           usersData?.map((person) => {
-            return (
-              <CardProfile
-                key={person.id}
-                name={`${person.name.firstname} ${person.name.lastname}`}
-                email={person.email}
-                phone={person.phone}
-              />
-            );
+            return <CardProfile key={person.id} data={person} />;
           })
         ) : (
-          <h1>NO DATA</h1>
+            <h1 className="text-[#72707a]">No data to display.</h1>
         )}
       </section>
       {usersData.length ? (

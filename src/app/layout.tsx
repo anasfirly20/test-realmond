@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${poppins.className} px-longer`}>
+      <body className={`${poppins.className} px-normal lg:px-normal`}>
         <Providers>
         <Navbar />
           <main>{children}</main>

@@ -9,6 +9,7 @@ import {
 } from '@nextui-org/table';
 import { Spinner } from '@nextui-org/spinner';
 import PaginationControls from '@/components/pagination-controls';
+import { capitalizeName } from '@/utils';
 
 const tableColumns = [
   'NO',
@@ -19,6 +20,7 @@ const tableColumns = [
   'ADDRESS',
   'ZIP CODE',
 ];
+const rowsPerPage = 5;
 
 interface IProps {
   usersData: IGetUsersResponse[];
@@ -37,6 +39,7 @@ export default function TableView({
 }: IProps): JSX.Element {
   return (
     <Table
+      className="border rounded-md border-[#272729]"
       aria-label="Example static collection table"
       bottomContent={
         <PaginationControls
@@ -57,16 +60,19 @@ export default function TableView({
           loadingContent={<Spinner color="success" label="Loading..." />}
         >
           {usersData?.map((user, index) => {
-            const rowsPerPage = 5;
-            const items_numbering = (page - 1) * rowsPerPage + index + 1;
+            const itemsNumbering = (page - 1) * rowsPerPage + index + 1;
             return (
-              <TableRow key={user.id}>
-                <TableCell>{items_numbering}</TableCell>
-                <TableCell>{user.name.firstname}</TableCell>
-                <TableCell>{user.name.lastname}</TableCell>
+              <TableRow key={user?.id}>
+                <TableCell>{itemsNumbering}</TableCell>
+                <TableCell>{capitalizeName(user?.name?.firstname)}</TableCell>
+                <TableCell>{capitalizeName(user?.name?.lastname)}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.phone}</TableCell>
-                <TableCell>{`${user.address.street}, ${user.address.city}`}</TableCell>
+                <TableCell>+ {user.phone}</TableCell>
+                <TableCell>
+                  {capitalizeName(
+                    `${user.address.street}, ${user.address.city}`
+                  )}
+                </TableCell>
                 <TableCell>{user.address.zipcode}</TableCell>
               </TableRow>
             );
