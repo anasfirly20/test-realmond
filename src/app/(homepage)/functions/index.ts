@@ -24,6 +24,8 @@ export const useHomePage = () => {
   const [page, setPage] = useState<number>(1);
   const [searchString, setSearchString] = useState<string>('');
 
+  const handleClearSearch = () => setSearchString('');
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchString(e.target.value);
 
@@ -75,5 +77,6 @@ export const useHomePage = () => {
     handleChangeView,
     handleSearch,
     viewOptions,
+    handleClearSearch,
   };
 };

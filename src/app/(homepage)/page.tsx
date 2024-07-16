@@ -20,6 +20,7 @@ export default function HomePage(): JSX.Element {
     view,
     handleChangeView,
     viewOptions,
+    handleClearSearch,
   } = useHomePage();
 
   const { isLoading, isError } = query;
@@ -28,19 +29,20 @@ export default function HomePage(): JSX.Element {
 
   const viewMode: Record<TViewOptions, React.ReactNode> = {
     '1': <CardView usersData={usersData} />,
-    '2': (
-      <TableView
-        usersData={usersData}
-        isLoading={isLoading}
-        page={page}
-      />
-    ),
+    '2': <TableView usersData={usersData} isLoading={isLoading} page={page} />,
   };
 
   return (
     <section className="flex flex-col justify-center gap-5 max-sm:pb-normal">
-      <Input placeholder="Search User..." isClearable onChange={handleSearch} />
+      <Input
+        aria-label="search-input"
+        placeholder="Search User..."
+        isClearable
+        onChange={handleSearch}
+        onClear={handleClearSearch}
+      />
       <Select
+        aria-label="select-view-mode"
         items={viewOptions}
         placeholder="Select view"
         defaultSelectedKeys={'1'}
