@@ -59,7 +59,7 @@ export default function HomePage(): JSX.Element {
         {(option) => <SelectItem key={option.id}>{option.label}</SelectItem>}
       </Select>
       {isLoading && <LoadingComponent />}
-      {isError && <ErrorComponent retry={true} />}
+      {isError && <ErrorComponent retry />}
       {!isLoading && !isError && viewMode[view]}
     </section>
   );
