@@ -20,7 +20,7 @@ export const useHomePage = () => {
     retry: 3,
   });
 
-  const rowsPerPage = 5;
+  const rowsPerPage = 3;
   const [page, setPage] = useState<number>(1);
   const [searchString, setSearchString] = useState<string>('');
 

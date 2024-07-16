@@ -8,7 +8,6 @@ import {
   TableCell,
 } from '@nextui-org/table';
 import { Spinner } from '@nextui-org/spinner';
-import PaginationControls from '@/components/pagination-controls';
 import { capitalizeName } from '@/utils';
 
 const tableColumns = [
@@ -20,34 +19,21 @@ const tableColumns = [
   'ADDRESS',
   'ZIP CODE',
 ];
-const rowsPerPage = 5;
+const rowsPerPage = 3;
 
 interface IProps {
   usersData: IGetUsersResponse[];
   isLoading: boolean;
   page: number;
-  totalPages: number;
-  onChangePage: ({ value }: { value: number }) => void;
 }
 
 export default function TableView({
   usersData,
   isLoading,
   page,
-  totalPages,
-  onChangePage,
 }: IProps): JSX.Element {
   return (
-    <Table
-      className="border rounded-md border-[#272729]"
-      bottomContent={
-        <PaginationControls
-          page={page}
-          totalPages={totalPages as number}
-          onChange={onChangePage}
-        />
-      }
-    >
+    <Table className="border rounded-md border-[#272729]">
       <TableHeader>
         {tableColumns?.map((column, index) => {
           return <TableColumn key={index}>{column}</TableColumn>;

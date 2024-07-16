@@ -4,7 +4,7 @@ import { IGetUserByIdResponse, IGetUsersResponse } from './types';
 
 export default class UsersApi {
   static async getUsers(): Promise<AxiosResponse<IGetUsersResponse[]>> {
-    return await api.get('/users');
+    return await api.get('/users?limit=9');
   }
 
   static async getUserById({

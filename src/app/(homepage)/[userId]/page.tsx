@@ -35,13 +35,22 @@ export default function UserDetailPage({
               />
             </div>
           )}
-          <Skeleton className="rounded-lg" isLoaded={!isLoading}>
-            <h1 className="text-xl">
-              {capitalizeName(
-                `${userData?.data?.name?.firstname} ${userData?.data?.name?.lastname}`
-              )}
-            </h1>
-          </Skeleton>
+          <div>
+            {isLoading ? (
+              <Skeleton className="rounded-lg" />
+            ) : (
+              <h1 className="text-xl">
+                {capitalizeName(
+                  `${userData?.data?.name?.firstname} ${userData?.data?.name?.lastname}`
+                )}
+              </h1>
+            )}
+            {isLoading ? (
+              <Skeleton className="rounded-lg" />
+            ) : (
+              <p className="text-sm text-[#929192]">{userData?.data?.email}</p>
+            )}
+          </div>
         </div>
         <div className="space-y-3">
           <div className="flex items-center gap-3">
@@ -62,7 +71,9 @@ export default function UserDetailPage({
             {isLoading ? (
               <Skeleton className="rounded-lg w-full sm:w-1/3 h-5" />
             ) : (
-              <p>{userData?.data?.phone}</p>
+              <p>{`${
+                userData?.data?.phone ? `+ ${userData?.data?.phone}` : ''
+              }`}</p>
             )}
           </div>
         </div>

@@ -1,12 +1,13 @@
 'use client';
 
 import { Input } from '@nextui-org/input';
-import { Select, SelectItem } from '@nextui-org/react';
+import { Select, SelectItem } from '@nextui-org/select';
 import { useHomePage } from './functions';
 import TableView from './components/table-view';
 import CardView from './components/card-view';
 import ErrorComponent from '@/components/error-component';
 import LoadingComponent from '@/components/loading-component';
+import PaginationControls from '@/components/pagination-controls';
 
 export default function HomePage(): JSX.Element {
   const {
@@ -20,27 +21,18 @@ export default function HomePage(): JSX.Element {
     handleChangeView,
     viewOptions,
   } = useHomePage();
-  
+
   const { isLoading, isError } = query;
 
   type TViewOptions = (typeof viewOptions)[number]['id'];
 
   const viewMode: Record<TViewOptions, React.ReactNode> = {
-    '1': (
-      <CardView
-        usersData={usersData}
-        page={page}
-        totalPages={totalPages}
-        onChangePage={handleChangePage}
-      />
-    ),
+    '1': <CardView usersData={usersData} />,
     '2': (
       <TableView
         usersData={usersData}
         isLoading={isLoading}
         page={page}
-        totalPages={totalPages}
-        onChangePage={handleChangePage}
       />
     ),
   };
@@ -60,6 +52,13 @@ export default function HomePage(): JSX.Element {
       {isLoading && <LoadingComponent />}
       {isError && <ErrorComponent retry />}
       {!isLoading && !isError && viewMode[view]}
+      {usersData.length ? (
+        <PaginationControls
+          page={page}
+          totalPages={totalPages as number}
+          onChange={handleChangePage}
+        />
+      ) : null}
     </section>
   );
 }

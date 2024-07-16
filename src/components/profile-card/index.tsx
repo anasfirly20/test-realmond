@@ -9,7 +9,7 @@ interface IProps {
 
 export default function CardProfile({ data }: IProps): JSX.Element {
   return (
-    <div className="relative border border-[#272729] rounded-md px-4 py-5 overflow-hidden lg:hover:scale-105 transition-transform duration-150 bg-[#232527]">
+    <div className="relative border border-[#272729] rounded-md px-4 sm:px-6 py-5 overflow-hidden lg:hover:scale-105 transition-transform duration-150 bg-[#232527]">
       <div className="w-full flex flex-col justify-center items-center gap-2">
         <div className="flex justify-center items-center rounded-full size-28 bg-blue-300 z-10 p-5 relative overflow-hidden">
           <Image
